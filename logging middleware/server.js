@@ -1,13 +1,15 @@
+require("dotenv").config();
+
 const express = require("express");
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Logging Middleware Running");
-});
+const testRoute = require("./routes/testRoute");
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+app.use("/api", testRoute);
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on port ${process.env.PORT}`);
 });
